@@ -13195,23 +13195,23 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "c:\\users\\pc_admin\\documents\\visual studio 2017\\Projects\\TizenSpeedTest\\TizenSpeedTest\\TizenSpeedTest.TizenMobile\\TizenSpeedTest.TizenMobile.csproj",
+      "projectUniqueName": "c:\\Users\\PC_Admin\\Documents\\Visual Studio 2017\\Projects\\TizenSpeedTest\\TizenSpeedTest\\TizenSpeedTest.TizenMobile\\TizenSpeedTest.TizenMobile.csproj",
       "projectName": "TizenSpeedTest.TizenMobile",
-      "projectPath": "c:\\users\\pc_admin\\documents\\visual studio 2017\\Projects\\TizenSpeedTest\\TizenSpeedTest\\TizenSpeedTest.TizenMobile\\TizenSpeedTest.TizenMobile.csproj",
-      "projectJsonPath": "c:\\users\\pc_admin\\documents\\visual studio 2017\\Projects\\TizenSpeedTest\\TizenSpeedTest\\TizenSpeedTest.TizenMobile\\TizenSpeedTest.TizenMobile.project.json",
+      "projectPath": "c:\\Users\\PC_Admin\\Documents\\Visual Studio 2017\\Projects\\TizenSpeedTest\\TizenSpeedTest\\TizenSpeedTest.TizenMobile\\TizenSpeedTest.TizenMobile.csproj",
+      "projectJsonPath": "c:\\Users\\PC_Admin\\Documents\\Visual Studio 2017\\Projects\\TizenSpeedTest\\TizenSpeedTest\\TizenSpeedTest.TizenMobile\\TizenSpeedTest.TizenMobile.project.json",
       "projectStyle": "ProjectJson",
       "frameworks": {
         "netcoreapp1.0": {
           "projectReferences": {
-            "c:\\users\\pc_admin\\documents\\visual studio 2017\\Projects\\TizenSpeedTest\\TizenSpeedTest\\TizenSpeedTest\\TizenSpeedTest.csproj": {
-              "projectPath": "c:\\users\\pc_admin\\documents\\visual studio 2017\\Projects\\TizenSpeedTest\\TizenSpeedTest\\TizenSpeedTest\\TizenSpeedTest.csproj"
+            "c:\\Users\\PC_Admin\\Documents\\Visual Studio 2017\\Projects\\TizenSpeedTest\\TizenSpeedTest\\TizenSpeedTest\\TizenSpeedTest.csproj": {
+              "projectPath": "c:\\Users\\PC_Admin\\Documents\\Visual Studio 2017\\Projects\\TizenSpeedTest\\TizenSpeedTest\\TizenSpeedTest\\TizenSpeedTest.csproj"
             }
           }
         }
       }
     },
     "dependencies": {
-      "Microsoft.NETCore.App": "[1.1.1, )",
+      "Microsoft.NETCore.App": "1.1.1",
       "Tizen.Library": "1.0.0-pre2",
       "Xamarin.Forms": "2.3.3.193",
       "Xamarin.Forms.Platform.Tizen": "2.3.3.175-beta-007"
