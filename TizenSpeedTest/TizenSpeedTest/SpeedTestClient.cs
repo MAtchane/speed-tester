@@ -52,7 +52,7 @@ namespace NSpeedTest
                     try
                     {
                         timer.Start();
-                        testString = await SpeedTestWebClient.client.GetStringAsync(latencyUri);
+                        testString = await SpeedTestWebClient.client.GetAsync(SpeedTestWebClient.AddTimeStamp(new Uri(latencyUri)), HttpCompletionOption.ResponseHeadersRead).GetAwaiter().GetResult().Content.ReadAsStringAsync();
                     }
                     catch (WebException)
                     {
@@ -82,7 +82,7 @@ namespace NSpeedTest
 
             return TestSpeed(testData, async (url) =>
             {
-                var data = await SpeedTestWebClient.client.GetStringAsync(url).ConfigureAwait(false);
+                var data = await SpeedTestWebClient.client.GetAsync(SpeedTestWebClient.AddTimeStamp(new Uri(url)), HttpCompletionOption.ResponseHeadersRead).GetAwaiter().GetResult().Content.ReadAsStringAsync();
                 return data.Length;
             }, simultaniousDownloads);
         }

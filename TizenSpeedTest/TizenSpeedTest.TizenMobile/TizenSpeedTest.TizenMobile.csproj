@@ -42,6 +42,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="Packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="TizenSpeedTest.TizenMobile.project.json" />
     <None Include="tizen-manifest.xml" />
     <None Include="shared\res\TizenSpeedTest.TizenMobile.png" />

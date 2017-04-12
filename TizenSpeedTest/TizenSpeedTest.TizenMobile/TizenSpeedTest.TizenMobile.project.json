@@ -6,9 +6,10 @@
     "preserveCompilationContext": true
   },
   "dependencies": {
+    "Microsoft.Bcl.Build": "1.0.21",
     "Microsoft.NETCore.App": "1.1.1",
     "Tizen.Library": "1.0.0-pre2",
-    "Xamarin.Forms": "2.3.3.193",
+    "Xamarin.Forms": "2.3.4.224",
     "Xamarin.Forms.Platform.Tizen": "2.3.3.175-beta-007"
   },
   "runtimes": {
