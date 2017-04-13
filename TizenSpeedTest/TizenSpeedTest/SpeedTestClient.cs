@@ -96,7 +96,7 @@ namespace NSpeedTest
             var testData = GenerateUploadData(retryCount);
             return TestSpeed(testData, async (uploadData) =>
             {
-                var stringContent = new StringContent(uploadData.ToString());
+                var stringContent = new StringContent(uploadData[uploadData.Keys.ToList()[0]]);
                 await SpeedTestWebClient.client.PostAsync(server.Url, stringContent).ConfigureAwait(false);
                 return uploadData[uploadData.Keys.ToList()[0]].Length;
             }, simultaniousUploads);
