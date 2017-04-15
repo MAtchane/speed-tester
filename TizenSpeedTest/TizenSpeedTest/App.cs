@@ -19,13 +19,20 @@ namespace TizenSpeedTest
         private static Settings settings;
         private const string DefaultCountry = "Belarus";
         private static string clientCountry = null;
+        private PrintableSpeed printableDownloadSpeed;
+        private PrintableSpeed printableUploadSpeed;
         private SpeedTestTab speedTestTab;
         private AboutTab aboutTab;
         private HistoryTab historyTab;
         private Button testBtn;
-        private Button aboutBtn;
-        private Button historyBtn;
+        private Label testBtnLabel;
+        private TapGestureRecognizer aboutBtn;
+        private TapGestureRecognizer historyBtn;
         private Label serverInfo;
+        private Label indicator;
+        private Grid resultsBoard;
+        private StackLayout indicators;
+        private Image inAppLogo;
         private Image downloadSpeedIcon;
         private Label downloadSpeedValue;
         private Label downloadSpeedLabel;
@@ -37,6 +44,7 @@ namespace TizenSpeedTest
 
         enum TestState
         {
+            Start,
             Idle,
             Testing,
             OneDone,
@@ -51,13 +59,13 @@ namespace TizenSpeedTest
             {
                 if (speed > 1024)
                 {
-                    speed =Math.Round(speed / 1024, 2);
+                    speed = Math.Round(speed / 1024, 1);
                     this.speed = speed;
                     this.label = "Mbps";
                 }
                 else
                 {
-                    speed = Math.Round(speed, 2);
+                    speed = Math.Round(speed, 1);
                     this.speed = speed;
                     this.label = "Kbps";
                 }
@@ -79,6 +87,12 @@ namespace TizenSpeedTest
 
             //setting references to the UI views
             testBtn = speedTestTab.FindByName<Button>("TestBtn");
+            testBtnLabel = speedTestTab.FindByName<Label>("TestBtnLabel");
+
+            resultsBoard = speedTestTab.FindByName<Grid>("ResultsBoard");
+            indicators = speedTestTab.FindByName<StackLayout>("Indicators");
+            indicator = speedTestTab.FindByName<Label>("Indicator");
+            inAppLogo = speedTestTab.FindByName<Image>("InAppLogo");
 
             downloadSpeedIcon = speedTestTab.FindByName<Image>("DownloadSpeedIcon");
             downloadSpeedValue = speedTestTab.FindByName<Label>("DownloadSpeedValue");
@@ -88,23 +102,24 @@ namespace TizenSpeedTest
             uploadSpeedValue = speedTestTab.FindByName<Label>("UploadSpeedValue");
             uploadSpeedLabel = speedTestTab.FindByName<Label>("UploadSpeedLabel");
 
-            historyBtn = speedTestTab.FindByName<Button>("History");
-            aboutBtn = speedTestTab.FindByName<Button>("About");
+            historyBtn = speedTestTab.FindByName<TapGestureRecognizer>("TapHistory");
+            aboutBtn = speedTestTab.FindByName<TapGestureRecognizer>("TapAbout");
             serverInfo = speedTestTab.FindByName<Label>("ServerInfo");
 
             //setting the click handelers
             testBtn.Clicked += OnTestBtnClicked;
-            historyBtn.Clicked += OnHistoryBtnClicked;
-            aboutBtn.Clicked += OnAboutBtnClicked;
+            historyBtn.Tapped += OnHistoryBtnClicked;
+            aboutBtn.Tapped += OnAboutBtnClicked;
 
             //State zero
-            myTestState = TestState.Idle;
+            myTestState = TestState.Start;
 
             //Using a NavigationPage to handle multiple tabs(pages)
             MainPage = new NavigationPage(speedTestTab)
-            { BarBackgroundColor = Color.FromHex("#343C46"),
-              BarTextColor = Color.FromHex("#F0F8E6")
-              };
+            {
+                BarBackgroundColor = Color.FromHex("#141526"),
+                BarTextColor = Color.FromHex("#FFFFFF")
+            };
 
 
 
@@ -113,9 +128,9 @@ namespace TizenSpeedTest
 
         private void OnTestBtnClicked(object sender, EventArgs e)
         {
-            testBtn.IsEnabled = false;
+
             HideResults();
-            myTestState = TestState.Testing;
+            UpdateTestState();
             Task.Run(async () =>
             {
                 StartSpeedTestAsync();
@@ -129,12 +144,14 @@ namespace TizenSpeedTest
 
         private void OnHistoryBtnClicked(object sender, EventArgs e)
         {
+            historyTab.UpdateHistoryTable();
             MainPage.Navigation.PushAsync(historyTab);
         }
 
         private void UpdateServerInfo(Server info)
         {
-            Xamarin.Forms.Device.BeginInvokeOnMainThread(() => {
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+            {
                 serverInfo.Text = "Hosted by " + info.Sponsor + " (" + info.Name + "/" + info.Country + ")";
 
             });
@@ -142,10 +159,11 @@ namespace TizenSpeedTest
 
         private void UpdateDownloadUi(double dnSpeed)
         {
-            var printableDownloadSpeed = new PrintableSpeed(dnSpeed);
+            printableDownloadSpeed = new PrintableSpeed(dnSpeed);
             UpdateTestState();
 
-            Xamarin.Forms.Device.BeginInvokeOnMainThread(() => {
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+            {
                 downloadSpeedValue.Text = printableDownloadSpeed.speed.ToString();
                 downloadSpeedLabel.Text = printableDownloadSpeed.label;
                 ShowDownloadResults();
@@ -158,10 +176,11 @@ namespace TizenSpeedTest
 
         private void UpdateUploadUi(double upSpeed)
         {
-            var printableUploadSpeed = new PrintableSpeed(upSpeed);
+            printableUploadSpeed = new PrintableSpeed(upSpeed);
             UpdateTestState();
 
-            Xamarin.Forms.Device.BeginInvokeOnMainThread(() => {
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+            {
                 uploadSpeedValue.Text = printableUploadSpeed.speed.ToString();
                 uploadSpeedLabel.Text = printableUploadSpeed.label;
                 ShowUploadResults();
@@ -179,45 +198,94 @@ namespace TizenSpeedTest
             {
                 myTestState = TestState.OneDone;
             }
-            else
+            else if (myTestState == TestState.OneDone)
             {
                 myTestState = TestState.AllDone;
             }
+            else if (myTestState == TestState.Start)
+            {
+                myTestState = TestState.Testing;
+                inAppLogo.IsVisible = false;
+            }
+            else
+            {
+                myTestState = TestState.Testing;
+            }
+        }
+
+        private void UpdateIndicators(string info = null)
+        {
+            if (info == null)
+            {
+                //damn, forgot why @TODO
+            }
+            else
+            {
+                indicator.Text = info;
+                if (myTestState == TestState.OneDone)
+                {
+                    indicators.IsVisible = false;
+                }
+                if (myTestState == TestState.AllDone)
+                {
+                    testBtn.Text = "Test Again";
+                    testBtn.IsEnabled = true;
+                    testBtn.IsVisible = true;
+                    testBtnLabel.IsVisible = false;
+                    UpdateTestsHistory();
+                }
+            }
+
+        }
+
+        private void UpdateTestsHistory()
+        {
+            string newTest = string.Format("{0};{1};{2};{3};{4}", DateTime.Now.ToString("MM-dd-yy"), printableDownloadSpeed.speed, printableDownloadSpeed.label,
+                    printableUploadSpeed.speed, printableUploadSpeed.label);
+            var currentNumberOfTests = HistoryTab.GetNumberOfHistoryEntries();
+            currentNumberOfTests++;
+            Application.Current.Properties["currentNumberOfTests"] = currentNumberOfTests;
+            var newTestKey = "test#" + currentNumberOfTests;
+            Application.Current.Properties[newTestKey] = newTest;
         }
 
         private void HideResults()
         {
-            serverInfo.Text = "Finding the Best Server";
+            serverInfo.Text = "";
+            UpdateIndicators("Getting Settings");
+            indicators.IsVisible = true;
+            downloadSpeedIcon.IsVisible = false;
             downloadSpeedLabel.IsVisible = false;
             downloadSpeedValue.IsVisible = false;
+            uploadSpeedIcon.IsVisible = false;
             uploadSpeedLabel.IsVisible = false;
             uploadSpeedValue.IsVisible = false;
+            testBtn.IsEnabled = false;
+            testBtn.IsVisible = false;
+            testBtnLabel.IsVisible = true;
         }
 
         private void ShowDownloadResults()
         {
+            resultsBoard.IsVisible = true;
+            downloadSpeedIcon.IsVisible = true;
             downloadSpeedLabel.IsVisible = true;
             downloadSpeedValue.IsVisible = true;
-            if (myTestState == TestState.AllDone)
-            {
-                testBtn.IsEnabled = true;
-            }
+            UpdateIndicators("D");
         }
 
         private void ShowUploadResults()
         {
+            resultsBoard.IsVisible = true;
+            uploadSpeedIcon.IsVisible = true;
             uploadSpeedLabel.IsVisible = true;
             uploadSpeedValue.IsVisible = true;
-            if (myTestState == TestState.AllDone)
-            {
-                testBtn.IsEnabled = true;
-            }
+            UpdateIndicators("U");
         }
 
         protected override void OnStart()
         {
             // Handle when your app starts
-            HideResults();
 
         }
 
@@ -245,7 +313,7 @@ namespace TizenSpeedTest
         private static IEnumerable<Server> SelectServers()
         {
             Debug.WriteLine("__");
-            Debug.WriteLine("Selecting best server by distance...");            
+            Debug.WriteLine("Selecting best server by distance...");
             List<Server> servers;
             if (clientCountry != null)
             {
@@ -296,16 +364,42 @@ namespace TizenSpeedTest
 
             client = new SpeedTestClient();
             settings = await client.GetSettingsAsync();
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+            {
+                UpdateIndicators("Getting Settings");
+
+            });
+
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+            {
+                UpdateIndicators("Getting Client's Country");
+
+            });
             clientCountry = await GetClienCountryAsync();
 
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+            {
+                UpdateIndicators("Selecting Best Server by Distance");
 
+            });
             var servers = SelectServers();
             var bestServer = SelectBestServer(servers);
             UpdateServerInfo(bestServer);
 
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+            {
+                UpdateIndicators("Testing Internet Speed");
+
+            });
             var downloadSpeed = client.TestDownloadSpeed(bestServer, settings.Download.ThreadsPerUrl);
             UpdateDownloadUi(downloadSpeed);
             //PrintSpeed("Download", downloadSpeed);
+
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+            {
+                UpdateIndicators("Testing Internet Speed");
+
+            });
             var uploadSpeed = client.TestUploadSpeed(bestServer, settings.Upload.ThreadsPerUrl);
             //PrintSpeed("Upload", uploadSpeed);
             UpdateUploadUi(uploadSpeed);

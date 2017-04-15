@@ -2,55 +2,59 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TizenSpeedTest.SpeedTestTab"
-             Title="Test"
-             BackgroundColor="#343C46">
+             Title=""
+             BackgroundColor="#141526">
     <StackLayout Spacing="20" x:Name="layout">
-        <Label HeightRequest="100" TextColor="#FFD074" Text="Server info: stuff stuff Casablanca MA" VerticalOptions="Center" x:Name="ServerInfo"
+        <Label TextColor="#FFD074" Text="" VerticalOptions="Start" x:Name="ServerInfo"
         HorizontalOptions="CenterAndExpand" />
         <StackLayout Spacing="10" HeightRequest="300" x:Name="speedDisplayLayout">
             <!-- two columns to diplay the upload and download speeds -->
-            <Grid VerticalOptions="FillAndExpand" ColumnSpacing="10">
+            <Grid IsVisible="False" x:Name="ResultsBoard" VerticalOptions="FillAndExpand" ColumnSpacing="10" Margin="10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="14*" />
-                    <ColumnDefinition Width="14*" />
-                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="20*" />
+                    <ColumnDefinition Width="20*" />
                 </Grid.ColumnDefinitions>
                 <!-- Download speed board-->
-                <Grid BackgroundColor="#FFD074" Grid.Column="1" VerticalOptions="FillAndExpand">
+                <Grid Grid.Column="0" VerticalOptions="Fill">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="4*"/>
                         <RowDefinition Height="5*"/>
                     </Grid.RowDefinitions>
                     <!--<Label Grid.Row="0" Text="Down" Font="72" TextColor="#354160" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand"/>-->
-                    <Image Grid.Row="0" x:Name="DownloadSpeedIcon" Source="Down48x3.png" HorizontalOptions="Start"/>
+                    <Image Grid.Row="0" x:Name="DownloadSpeedIcon" Source="ReverseDown.png" BackgroundColor="#FFFFFF" VerticalOptions="End" HorizontalOptions="Start"/>
                     <Grid Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="4*" />
                             <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" x:Name="DownloadSpeedValue" Text="XXX" Font="72" TextColor="#354160" VerticalOptions="CenterAndExpand" HorizontalOptions="Center"/>
-                        <Label Grid.Column="1" x:Name="DownloadSpeedLabel" Text="Mbps" Font="24" TextColor="#354160" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"/>
+                        <Label Grid.Column="0" x:Name="DownloadSpeedValue" Text="XXX" Font="54" TextColor="#FFFFFF" VerticalOptions="CenterAndExpand" HorizontalOptions="Center"/>
+                        <Label Grid.Column="1" x:Name="DownloadSpeedLabel" Text="Mbps" Font="22" TextColor="#FFFFFF" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"/>
                     </Grid>
                 </Grid>
                 <!-- Upload speed board-->
-                <Grid BackgroundColor="#FFD074" Grid.Column="2" VerticalOptions="FillAndExpand">
+                <Grid Grid.Column="1" VerticalOptions="Fill">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="4*"/>
                         <RowDefinition Height="5*"/>
                     </Grid.RowDefinitions>
                     <!--<Label Grid.Row="0" Text="Up" Font="72" TextColor="#354160" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand"/>-->
-                    <Image Grid.Row="0" x:Name="UploadSpeedIcon" Source="Up48x3.png" HorizontalOptions="Start"/>
+                    <Image Grid.Row="0" x:Name="UploadSpeedIcon" Source="ReverseUp.png" BackgroundColor="#FFFFFF" VerticalOptions="End" HorizontalOptions="Start"/>
                     <Grid Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="4*" />
                             <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" x:Name="UploadSpeedValue" Text="XXX" Font="72" TextColor="#354160" VerticalOptions="CenterAndExpand" HorizontalOptions="Center"/>
-                        <Label Grid.Column="1" x:Name="UploadSpeedLabel" Text="Mbps" Font="24" TextColor="#354160" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"/>
+                        <Label Grid.Column="0" x:Name="UploadSpeedValue" Text="XXX" Font="54" TextColor="#FFFFFF" VerticalOptions="CenterAndExpand" HorizontalOptions="Center"/>
+                        <Label Grid.Column="1" x:Name="UploadSpeedLabel" Text="Mbps" Font="22" TextColor="#FFFFFF" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"/>
                     </Grid>
                 </Grid>
             </Grid>
+            <!-- App Logo, Displayed Onstart -->
+            <Image IsVisible="True" x:Name="InAppLogo" Source="ReverseInAppLogo.png" BackgroundColor="#FFFFFF" VerticalOptions="Center" HorizontalOptions="Center"/>
+            <!-- Indicators, to keep the user updated -->
+            <StackLayout IsVisible="False" x:Name="Indicators">
+                <Label x:Name="Indicator" TextColor="#FFD074" Text="..........." VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Font="24"/>
+            </StackLayout>
         </StackLayout>
         <!-- Grid for nvigation buttons -->
         <Grid VerticalOptions="FillAndExpand">
@@ -59,16 +63,26 @@
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
             <Button Grid.Row="0" x:Name="TestBtn" HeightRequest="100" WidthRequest="250" Text="Begin Test" Font="26" VerticalOptions="Center"
-        HorizontalOptions="CenterAndExpand" BackgroundColor="#E87D5B" TextColor="#343C46"/>
+        HorizontalOptions="CenterAndExpand" TextColor="#FFF38E" BorderColor="#FFF38E" BackgroundColor="#141526"/>
+            <Label Grid.Row="0" x:Name="TestBtnLabel" HeightRequest="100" WidthRequest="250" Text="" Font="16" VerticalOptions="Center"
+        HorizontalOptions="CenterAndExpand" TextColor="#FFF38E" IsVisible="False"/>
             <Grid Grid.Row="1" HeightRequest="100" VerticalOptions="Center" ColumnSpacing="30">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="4*" />
                     <ColumnDefinition Width="4*" />
-                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" x:Name="History" Text="History" Font="20" HorizontalOptions="Center" WidthRequest="150" HeightRequest="80" BackgroundColor="#F0F8E6" TextColor="#354160"/>
-                <Button Grid.Column="2" x:Name="About" Text="About" Font="20" HorizontalOptions="Center" WidthRequest="150" HeightRequest="80" BackgroundColor="#F0F8E6" TextColor="#354160"/>
+                <Image Grid.Column="1" x:Name="History" Source="HistoryIcon.png" HorizontalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="TapHistory" NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Grid.Column="2" x:Name="About" Source="AboutIcon.png" HorizontalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="TapAbout" NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
             </Grid>
         </Grid>
         

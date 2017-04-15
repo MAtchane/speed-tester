@@ -2,10 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TizenSpeedTest.AboutTab"
-             Title="About">
+             Title="About"
+             BackgroundColor="#141526">
     <ContentPage.Content>
         <StackLayout Padding="5,10">
-            <Label TextColor="#77d065" FontSize = "20" Text="to be filled." />
+            <Label TextColor="#77d065" FontSize = "20" Text="GHa chi zwaml......" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
