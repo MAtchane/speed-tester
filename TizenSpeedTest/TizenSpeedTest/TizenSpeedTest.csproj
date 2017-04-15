@@ -34,6 +34,18 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AboutTab.xaml.cs">
+      <DependentUpon>AboutTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="History.xaml.cs">
+      <DependentUpon>History.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HistoryTab.xaml.cs">
+      <DependentUpon>HistoryTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HomeTabsPage.xaml.cs">
+      <DependentUpon>HomeTabsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HttpUtility.cs" />
     <Compile Include="ISpeedTestClient.cs" />
     <Compile Include="Models\Client.cs" />
@@ -46,8 +58,11 @@
     <Compile Include="Models\Times.cs" />
     <Compile Include="Models\Upload.cs" />
     <Compile Include="SpeedTestClient.cs" />
+    <Compile Include="SpeedTestTab.xaml.cs">
+      <DependentUpon>SpeedTestTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SpeedTestWebClient.cs" />
-    <Compile Include="TizenSpeedTest.cs" />
+    <Compile Include="App.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +90,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HomeTabsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AboutTab.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SpeedTestTab.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\test.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HistoryTab.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="History.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
