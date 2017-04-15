@@ -104,9 +104,9 @@ namespace TizenSpeedTest
                 }
             };
             //Background for the Columns 
-            grid.Children.Add(new BoxView { BackgroundColor = Color.AntiqueWhite }, 0, 1, 0, numberOfEntries + 1);
-            grid.Children.Add(new BoxView { BackgroundColor = Color.Beige }, 1, 2, 0, numberOfEntries + 1);
-            grid.Children.Add(new BoxView { BackgroundColor = Color.AntiqueWhite }, 2, 3, 0, numberOfEntries + 1);           
+            grid.Children.Add(new BoxView { BackgroundColor = Color.FromHex("#948073") }, 0, 1, 0, numberOfEntries + 1);
+            grid.Children.Add(new BoxView { BackgroundColor = Color.FromHex("#B89B8A") }, 1, 2, 0, numberOfEntries + 1);
+            grid.Children.Add(new BoxView { BackgroundColor = Color.FromHex("#948073") }, 2, 3, 0, numberOfEntries + 1);           
 
             //Headers
             grid.Children.Add(new Label { Text = "Date", HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.CenterAndExpand }, 0, 0);

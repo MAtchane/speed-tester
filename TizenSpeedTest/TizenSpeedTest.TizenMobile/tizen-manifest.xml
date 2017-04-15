@@ -2,7 +2,7 @@
 <manifest package="TizenSpeedTest.TizenMobile" version="1.0.0" api-version="3.0" xmlns="http://tizen.org/ns/packages">
   <profile name="common" />
   <ui-application appid="org.tizen.TinyMonkey.TizenSpeedTest.TizenMobile" exec="TizenSpeedTest.TizenMobile.exe" multiple="false" nodisplay="false" taskmanage="true" splash-screen-display="true" type="dotnet" launch_mode="single">
-    <icon>TizenSpeedTest.TizenMobile.png</icon>
+    <icon>TizenIcon.png</icon>
     <label>Speed Tester</label>
   </ui-application>
   <shortcut-list />

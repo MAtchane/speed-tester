@@ -5,8 +5,11 @@
              Title="About"
              BackgroundColor="#141526">
     <ContentPage.Content>
-        <StackLayout Padding="5,10">
-            <Label TextColor="#77d065" FontSize = "20" Text="GHa chi zwaml......" />
+        <StackLayout Padding="20,20" Spacing="10">
+            <Label HorizontalTextAlignment="Center" VerticalOptions="Center" TextColor="#FFFFFF" FontSize = "Medium" Text="Speed Tester is a simple yet practical app that uses the industry most powerful tools for internet metrics to provide Tizen users with a powerful way to measure their internet performance." />
+            <Label HorizontalTextAlignment="Center" TextColor="#FFFFFF" FontSize = "Default" Text="For more information email us at:" />
+            <Label HorizontalTextAlignment="Center" TextColor="#FFFFFF" FontSize = "Default" Text="Tizen.SpeedTest@Gmail.com" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

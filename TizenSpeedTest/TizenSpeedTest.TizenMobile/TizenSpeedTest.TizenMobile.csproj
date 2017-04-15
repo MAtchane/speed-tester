@@ -74,6 +74,7 @@
     <Content Include="res\InAppLogo.png" />
     <Content Include="res\Up48x2.png" />
     <Content Include="res\Up48x3.png" />
+    <Content Include="shared\res\TizenIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
