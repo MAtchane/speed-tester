@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using NSpeedTest;
 using NSpeedTest.Models;
+using Plugin.DeviceInfo;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -120,6 +121,7 @@ namespace TizenSpeedTest
                 BarBackgroundColor = Color.FromHex("#141526"),
                 BarTextColor = Color.FromHex("#FFFFFF")
             };
+
 
 
 
@@ -252,7 +254,7 @@ namespace TizenSpeedTest
 
         private void HideResults()
         {
-            serverInfo.Text = "";
+            serverInfo.Text = "    ";
             UpdateIndicators("Getting Settings");
             indicators.IsVisible = true;
             downloadSpeedIcon.IsVisible = false;

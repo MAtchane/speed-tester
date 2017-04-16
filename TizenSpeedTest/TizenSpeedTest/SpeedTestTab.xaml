@@ -5,9 +5,9 @@
              Title=""
              BackgroundColor="#141526">
     <StackLayout Spacing="20" x:Name="layout">
-        <Label TextColor="#FFD074" Text="" VerticalOptions="Start" x:Name="ServerInfo"
+        <Label TextColor="#FFD074" Text="    " VerticalOptions="Start" x:Name="ServerInfo"
         HorizontalOptions="CenterAndExpand" />
-        <StackLayout Spacing="10" HeightRequest="300" x:Name="speedDisplayLayout">
+        <StackLayout Spacing="10" HeightRequest="400" x:Name="speedDisplayLayout">
             <!-- two columns to diplay the upload and download speeds -->
             <Grid IsVisible="False" x:Name="ResultsBoard" VerticalOptions="CenterAndExpand" ColumnSpacing="10" Margin="10">
                 <Grid.ColumnDefinitions>
@@ -62,7 +62,7 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" x:Name="TestBtn" HeightRequest="100" WidthRequest="250" Text="Begin Test" Font="26" VerticalOptions="Center"
+            <Button Grid.Row="0" x:Name="TestBtn" HeightRequest="100" MinimumWidthRequest="300" Text="Begin Test" Font="36" VerticalOptions="Center"
         HorizontalOptions="CenterAndExpand" TextColor="#FFF38E" BorderColor="#FFF38E" BackgroundColor="#141526"/>
             <ActivityIndicator Grid.Row="0" x:Name="TestBtnLabel" VerticalOptions="CenterAndExpand"
         HorizontalOptions="CenterAndExpand" Color="#FFF38E" IsVisible="False" IsRunning="True"/>
