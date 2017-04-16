@@ -104,23 +104,27 @@ namespace TizenSpeedTest
                 }
             };
             //Background for the Columns 
-            grid.Children.Add(new BoxView { BackgroundColor = Color.FromHex("#948073") }, 0, 1, 0, numberOfEntries + 1);
-            grid.Children.Add(new BoxView { BackgroundColor = Color.FromHex("#B89B8A") }, 1, 2, 0, numberOfEntries + 1);
-            grid.Children.Add(new BoxView { BackgroundColor = Color.FromHex("#948073") }, 2, 3, 0, numberOfEntries + 1);           
+            grid.Children.Add(new BoxView { BackgroundColor = Color.FromHex("#948073") }, 0, 1, 0, 1);
+            grid.Children.Add(new BoxView { BackgroundColor = Color.FromHex("#B89B8A") }, 1, 2, 0, 1);
+            grid.Children.Add(new BoxView { BackgroundColor = Color.FromHex("#948073") }, 2, 3, 0, 1);           
 
             //Headers
-            grid.Children.Add(new Label { Text = "Date", HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.CenterAndExpand }, 0, 0);
-            grid.Children.Add(new Label { Text = "Download", HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.CenterAndExpand }, 1, 0);
-            grid.Children.Add(new Label { Text = "Upload", HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.CenterAndExpand},2, 0);
+            grid.Children.Add(new Label { Text = "Date", TextColor = Color.FromHex("#141526"), HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.CenterAndExpand, VerticalOptions = LayoutOptions.CenterAndExpand}, 0, 0);
+            grid.Children.Add(new Label { Text = "Download", TextColor = Color.FromHex("#141526"), HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.CenterAndExpand, VerticalOptions = LayoutOptions.CenterAndExpand}, 1, 0);
+            grid.Children.Add(new Label { Text = "Upload", TextColor = Color.FromHex("#141526"), HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.CenterAndExpand, VerticalOptions = LayoutOptions.CenterAndExpand},2, 0);
 
             //Add history entries to the grid
             for (int i = 1; i < numberOfEntries+1; i++)
             {
                 var entry = ReadHistoryEntry(i);
                 var dataFromEntry = new HistoryEntry(entry);
-                grid.Children.Add(new Label { Text = dataFromEntry.Date, HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.CenterAndExpand}, 0, i);
-                grid.Children.Add(new Label { Text = dataFromEntry.DownloadSpeed + " " + dataFromEntry.DownloadUnit, HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.CenterAndExpand }, 1, i);
-                grid.Children.Add(new Label { Text = dataFromEntry.UploadSpeed + " " + dataFromEntry.UploadUnit, HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.CenterAndExpand }, 2, i);
+                //Background for the Columns 
+                grid.Children.Add(new BoxView { BackgroundColor = Color.FromHex("#948073") }, 0, 1, i, i + 1);
+                grid.Children.Add(new BoxView { BackgroundColor = Color.FromHex("#B89B8A") }, 1, 2, i, i + 1);
+                grid.Children.Add(new BoxView { BackgroundColor = Color.FromHex("#948073") }, 2, 3, i, i + 1);
+                grid.Children.Add(new Label { Text = dataFromEntry.Date, TextColor = Color.FromHex("#141526"), HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.CenterAndExpand, VerticalOptions = LayoutOptions.CenterAndExpand }, 0, i);
+                grid.Children.Add(new Label { Text = dataFromEntry.DownloadSpeed + " " + dataFromEntry.DownloadUnit, TextColor = Color.FromHex("#141526"), HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.CenterAndExpand, VerticalOptions = LayoutOptions.CenterAndExpand}, 1, i);
+                grid.Children.Add(new Label { Text = dataFromEntry.UploadSpeed + " " + dataFromEntry.UploadUnit, TextColor = Color.FromHex("#141526"), HorizontalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.CenterAndExpand, VerticalOptions = LayoutOptions.CenterAndExpand}, 2, i);
 
             }
 

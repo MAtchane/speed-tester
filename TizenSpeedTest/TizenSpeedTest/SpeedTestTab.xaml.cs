@@ -26,6 +26,12 @@ namespace TizenSpeedTest
             {
                 this.width = width;
                 this.height = height;
+                OnOrientationChanged();
+            }
+        }
+
+        public void OnOrientationChanged()
+        {
                 var isNotUwp = (Device.RuntimePlatform != Device.Windows);
 
                 if (isNotUwp)
@@ -42,6 +48,8 @@ namespace TizenSpeedTest
                             layout.Spacing = 0;
                             History.Scale = 0.5;
                             About.Scale = 0.5;
+                            DownloadSpeedValue.FontSize = 46;
+                            UploadSpeedValue.FontSize = 46;
                         }
                         else // hd screens
                         {
@@ -56,12 +64,14 @@ namespace TizenSpeedTest
                     {
                         if (width < 500) //sd screens
                         {
-                            speedDisplayLayout.HeightRequest = 280;
+                            speedDisplayLayout.HeightRequest = 275;
                             InAppLogo.VerticalOptions = LayoutOptions.StartAndExpand;
                             TestBtn.FontSize = 26;
-                            InAppLogo.Scale = 0.6;
+                            InAppLogo.Scale = 0.5;
                             History.Scale = 0.6;
                             About.Scale = 0.6;
+                            DownloadSpeedValue.FontSize = 42;
+                            UploadSpeedValue.FontSize = 42;
                         }
                         else // hd screens
                         {
@@ -72,10 +82,10 @@ namespace TizenSpeedTest
 
                     }
                 }
-                
 
 
-            }
+
+            
         }
 
         public static Animation CreateFlashingAnimation()

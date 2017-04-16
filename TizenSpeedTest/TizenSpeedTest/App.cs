@@ -60,13 +60,13 @@ namespace TizenSpeedTest
             {
                 if (speed > 1024)
                 {
-                    speed = Math.Round(speed / 1024, 1);
+                    speed = Math.Round(speed / 1024, 2);
                     this.speed = speed;
                     this.label = "Mbps";
                 }
                 else
                 {
-                    speed = Math.Round(speed, 1);
+                    speed = Math.Round(speed, 2);
                     this.speed = speed;
                     this.label = "Kbps";
                 }
@@ -155,7 +155,7 @@ namespace TizenSpeedTest
         {
             Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
             {
-                serverInfo.Text = String.Format("Server Hosted by {0} ({1}/{2}).", info.Sponsor, info.Name, info.Country);
+                serverInfo.Text = String.Format("Server Hosted by {0} ({1}/{2})", info.Sponsor, info.Name, info.Country);
 
             });
         }
