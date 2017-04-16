@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="res\AboutIcon.png" />
+    <Content Include="res\DownloadIcon.png" />
     <Content Include="res\HistoryIcon.png" />
     <Content Include="res\ReverseDown.png" />
     <Content Include="res\ReverseInAppLogo.png" />
@@ -74,6 +75,7 @@
     <Content Include="res\InAppLogo.png" />
     <Content Include="res\Up48x2.png" />
     <Content Include="res\Up48x3.png" />
+    <Content Include="res\UploadIcon.png" />
     <Content Include="shared\res\TizenIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

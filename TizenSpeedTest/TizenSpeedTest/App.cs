@@ -25,7 +25,7 @@ namespace TizenSpeedTest
         private AboutTab aboutTab;
         private HistoryTab historyTab;
         private Button testBtn;
-        private Label testBtnLabel;
+        private ActivityIndicator testBtnLabel;
         private TapGestureRecognizer aboutBtn;
         private TapGestureRecognizer historyBtn;
         private Label serverInfo;
@@ -87,7 +87,7 @@ namespace TizenSpeedTest
 
             //setting references to the UI views
             testBtn = speedTestTab.FindByName<Button>("TestBtn");
-            testBtnLabel = speedTestTab.FindByName<Label>("TestBtnLabel");
+            testBtnLabel = speedTestTab.FindByName<ActivityIndicator>("TestBtnLabel");
 
             resultsBoard = speedTestTab.FindByName<Grid>("ResultsBoard");
             indicators = speedTestTab.FindByName<StackLayout>("Indicators");
@@ -128,9 +128,10 @@ namespace TizenSpeedTest
 
         private void OnTestBtnClicked(object sender, EventArgs e)
         {
-
-            HideResults();
             UpdateTestState();
+            ShowDownloadResults();
+            ShowUploadResults();
+            HideResults();
             Task.Run(async () =>
             {
                 StartSpeedTestAsync();
@@ -152,7 +153,7 @@ namespace TizenSpeedTest
         {
             Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
             {
-                serverInfo.Text = "Hosted by " + info.Sponsor + " (" + info.Name + "/" + info.Country + ")";
+                serverInfo.Text = String.Format("Server Hosted by {0} ({1}/{2}).", info.Sponsor, info.Name, info.Country);
 
             });
         }
