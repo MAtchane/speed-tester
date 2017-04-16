@@ -26,48 +26,53 @@ namespace TizenSpeedTest
             {
                 this.width = width;
                 this.height = height;
+                var isNotUwp = (Device.RuntimePlatform != Device.Windows);
 
-
-                if (width > height) //on Landscape
+                if (isNotUwp)
                 {
-                    if (height < 500) //sd screens
+
+                    if (width > height) //on Landscape
                     {
-                        speedDisplayLayout.HeightRequest = 270;
-                        TestBtn.FontSize = 22;
-                        InAppLogo.VerticalOptions = LayoutOptions.StartAndExpand;
-                        InAppLogo.Scale = 0.5;
-                        layout.Spacing = 0;
-                        History.Scale = 0.7;
-                        About.Scale = 0.7;
-                    }
-                    else // hd screens
-                    {
-                        TestBtn.FontSize = 30;
-                        InAppLogo.Scale = 0.7;
+                        if (height < 500) //sd screens
+                        {
+                            speedDisplayLayout.HeightRequest = 270;
+                            TestBtn.FontSize = 22;
+                            InAppLogo.VerticalOptions = LayoutOptions.StartAndExpand;
+                            InAppLogo.Scale = 0.5;
+                            layout.Spacing = 0;
+                            History.Scale = 0.5;
+                            About.Scale = 0.5;
+                        }
+                        else // hd screens
+                        {
+                            TestBtn.FontSize = 30;
+                            InAppLogo.Scale = 0.7;
+                        }
+
                     }
 
+
+                    if (width < height) // on Portrait sd
+                    {
+                        if (width < 500) //sd screens
+                        {
+                            speedDisplayLayout.HeightRequest = 280;
+                            InAppLogo.VerticalOptions = LayoutOptions.StartAndExpand;
+                            TestBtn.FontSize = 26;
+                            InAppLogo.Scale = 0.6;
+                            History.Scale = 0.6;
+                            About.Scale = 0.6;
+                        }
+                        else // hd screens
+                        {
+                            TestBtn.FontSize = 36;
+                            InAppLogo.Scale = 1;
+                        }
+
+
+                    }
                 }
-
-
-                if (width < height) // on Portrait sd
-                {
-                    if (width < 500) //sd screens
-                    {
-                        speedDisplayLayout.HeightRequest = 270;
-                        InAppLogo.VerticalOptions = LayoutOptions.StartAndExpand;
-                        TestBtn.FontSize = 26;
-                        InAppLogo.Scale = 0.5;
-                        History.Scale = 0.7;
-                        About.Scale = 0.7;
-                    }
-                    else // hd screens
-                    {
-                        TestBtn.FontSize = 36;
-                        InAppLogo.Scale = 1;
-                    }
-
-
-                }
+                
 
 
             }
